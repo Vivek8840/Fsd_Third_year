@@ -1,0 +1,22 @@
+import { useEffect, useState } from "react";
+import { getWeather } from "../services/weatherService";
+
+function WeatherWidget({ city }) {
+  const [weather, setWeather] = useState(null);
+
+  useEffect(() => {
+    getWeather(city).then(setWeather);
+  }, [city]);
+
+  if (!weather) return <p>Loading weather...</p>;
+
+  return (
+    <div>
+      <h3>{city}</h3>
+      <p>{weather.main.temp}°C</p>
+      <p>{weather.weather[0].description}</p>
+    </div>
+  );
+}
+
+export default WeatherWidget;
