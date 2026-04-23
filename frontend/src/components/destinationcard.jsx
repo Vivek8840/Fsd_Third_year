@@ -1,38 +1,36 @@
+import { useNavigate } from "react-router-dom";
+import { Card, CardContent, Typography, Button } from "@mui/material";
+
 function DestinationCard({ place }) {
+  const navigate = useNavigate(); // ✅ inside component
+
   return (
-    <div style={{
-      border: "1px solid #ddd",
-      borderRadius: "10px",
-      overflow: "hidden",
-      boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-      transition: "0.3s",
-    }}>
-      <img 
-        src={place.image} 
+    <Card
+      sx={{
+        maxWidth: 300,
+        borderRadius: 3,
+        boxShadow: 3,
+        cursor: "pointer",
+      }}
+    >
+      <img
+        src={place.image}
         alt={place.name}
-        style={{ width: "100%", height: "200px", objectFit: "cover" }} 
+        style={{ width: "100%", height: "180px", objectFit: "cover" }}
       />
 
-      <div style={{ padding: "15px" }}>
-        <h3>{place.name}</h3>
+      <CardContent>
+        <Typography variant="h6">{place.name}</Typography>
 
-        <button 
-          onClick={() => alert(`Booking for ${place.name} coming soon`)}
-          style={{
-            marginTop: "10px",
-            padding: "10px",
-            width: "100%",
-            background: "#007bff",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer"
-          }}
+        <Button
+          variant="contained"
+          sx={{ marginTop: 2 }}
+          onClick={() => navigate(`/destination/${place.name}`)}
         >
           Book Now
-        </button>
-      </div>
-    </div>
+        </Button>
+      </CardContent>
+    </Card>
   );
 }
 
